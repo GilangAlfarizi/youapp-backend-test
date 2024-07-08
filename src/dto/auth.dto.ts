@@ -1,11 +1,11 @@
-export class RegisterUser {
+export class RegisterUserDTO {
   email: string;
   username: string;
   password: string;
   confirmPassword: string;
 }
 
-export class LoginUser {
+export class LoginUserDTO {
   email?: string;
   username?: string;
   password: string;
