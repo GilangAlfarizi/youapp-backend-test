@@ -4,7 +4,7 @@ import { FilterQuery, Model, PipelineStage, Types } from 'mongoose';
 import { IProfile } from '../schemas/interfaces/profile.interface';
 import ProfileSchema from '../schemas/profile.schema';
 import { UpdateProfileDTO } from '../dto/profile.dto';
-import { getHoroscope } from '../utils/birthday.util';
+import { getChineseZodiac, getHoroscope } from '../utils/birthday.util';
 
 export class ProfileService {
   private profileModel: Model<IProfile>;
@@ -34,6 +34,7 @@ export class ProfileService {
   async updateOneProfile(body: UpdateProfileDTO): Promise<any> {
     const parseDate = new Date(body.birthday);
     const horoscope = getHoroscope(parseDate);
+    const zodiac = getChineseZodiac(parseDate);
 
     return await this.profileModel.findOneAndUpdate(
       { user: body.user },
@@ -44,6 +45,7 @@ export class ProfileService {
         height: body.height,
         weight: body.weight,
         horoscope,
+        zodiac,
       },
       { new: true },
     );

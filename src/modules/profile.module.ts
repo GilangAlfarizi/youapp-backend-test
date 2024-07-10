@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
 import { MongooseConfigService } from '../db/db.config';
 import { JwtModule } from '@nestjs/jwt';
+import { ProfileController } from 'src/controllers/profile.controller';
+import { ProfileService } from 'src/services/profile.service';
 
 @Module({
   imports: [
@@ -11,7 +11,7 @@ import { JwtModule } from '@nestjs/jwt';
       signOptions: { expiresIn: '1m' },
     }),
   ],
-  controllers: [AuthController],
-  providers: [AuthService, MongooseConfigService],
+  controllers: [ProfileController],
+  providers: [ProfileService, MongooseConfigService],
 })
-export class AuthModule {}
+export class ProfileModule {}
